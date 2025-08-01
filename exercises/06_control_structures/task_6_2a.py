@@ -18,40 +18,35 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
 l=list()
+schet1=0
+schet2=0
 b1=False
 b2=False
-b3=True
-p = 0
-c = 0
-schet=0
+b3=False
 Ip_adress=input('Введите IP-адрес:')
-schet=Ip_adress.count('.')
 l=Ip_adress.split('.')
-if Ip_adress=='255.255.255.255': 
-   print('local broadcast')
+if Ip_adress.count('.')==3:
    b1=True
-elif Ip_adress=='0.0.0.0': 
-   print('unassigned')
-   b2=True
 for i in l:
-   print(type(i))
-   if (i.isdigit()==True):
-    p+=1
-    print(p)
-    if (int(i)>=0) and (int(i)<=255):
-     c+=1 
-     print(c)      
-if (p==len(l)) and (c==len(l)) and (schet==3):
+   if i.isdigit()==True:
+      schet1+=1
+   if schet1==4:
+      b2=True
+for j in l:
+   if (b2==True) and (int(j)>=0) and (int(j)<=255):
+      schet2+=1
+   if schet2==4:
+      b3=True
+if (b1!=True) or (b2!=True) or (b3!=True):
+   print('Неправильный IP-адрес')
+else:           
    if(int(l[0])>=1) and (int(l[0])<=223):
-     print('unicast')
+    print('unicast')
    elif (int(l[0])>=224) and (int(l[0])<=239):
-     print('multicast')
-   elif (b1 == False) and (b2 == False):
-     print('unused')
-   elif (b3==True):
-     print('Неправильный IP-адрес')
-    
-
-    
-      
-      
+    print('multicast')
+   elif Ip_adress=='255.255.255.255':
+    print('local broadcast')
+   elif Ip_adress=='0.0.0.0': 
+    print('unassigned')
+   else:
+    print('unused')         

@@ -49,3 +49,35 @@ bin_ip = "00001010000000010000000111000011"
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+ip = input('Введите IP-адес:')
+part1 = ip.split('/')
+ip_adress = part1[0].split('.')
+mask = part1[1]
+mask = int(mask)
+num1 = ip_adress[0]
+num2 = ip_adress[1]
+num3 = ip_adress[2]
+num4 = ip_adress[3]
+result = '{:08b}{:08b}{:08b}{:08b}'
+p = result.format(int(num1),int(num2),int(num3),int(num4))
+r = p[0:mask] + '0'*(32-mask)
+num_1 = int(r[0:8],2)
+num_2 = int(r[8:16],2)
+num_3 = int(r[16:24],2)
+num_4 = int(r[24::],2) 
+result1 = '''
+Network:
+{:<8} {:<8} {:<8} {:<8}
+{:08b} {:08b} {:08b} {:08b}
+''' 
+print(result1.format(num_1,num_2,num_3,num_4,num_1,num_2,num_3,num_4))
+mask = part1[1]
+mask = int(mask)
+s = '1'*mask + '0'*(32-mask)
+result2 = '''
+Mask:
+/{}
+{:<8} {:<8} {:<8} {:<8}
+{:<8} {:<8} {:<8} {:<8}
+'''
+print(result2.format(part1[1],int(s[0:8],2),int(s[8:16],2),int(s[16:24],2),int(s[24:],2),s[0:8],s[8:16],s[16:24],s[24:]))
